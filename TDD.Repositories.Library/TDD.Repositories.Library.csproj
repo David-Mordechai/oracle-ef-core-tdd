@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TDD.Data.Library\TDD.Data.Library.csproj" />
+    <ProjectReference Include="..\TDD.Domain.Library\TDD.Domain.Library.csproj" />
+    <ProjectReference Include="..\TDD.Repositories.Library.Core\TDD.Repositories.Library.Core.csproj" />
+  </ItemGroup>
+
+</Project>
