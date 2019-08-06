@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TDD.Data.Library;
 using TDD.Domain.Library.Entities;
 using TDD.Repositories.Library.Core;
 
@@ -10,12 +8,10 @@ namespace TDD.WebSite.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly EmployeeContext _context;
         private readonly IEmpoyeeRepository _empoyeeRepository;
 
-        public EmployeesController(EmployeeContext context, IEmpoyeeRepository empoyeeRepository)
-        {
-            _context = context;
+        public EmployeesController(IEmpoyeeRepository empoyeeRepository)
+        { 
             _empoyeeRepository = empoyeeRepository;
         }
 
@@ -51,8 +47,7 @@ namespace TDD.WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
-                await _context.SaveChangesAsync();
+                await _empoyeeRepository.AddEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
             return View(employee);
@@ -65,7 +60,7 @@ namespace TDD.WebSite.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _empoyeeRepository.GetEmployeeById((int)id);
             if (employee == null)
             {
                 return NotFound();
@@ -86,12 +81,11 @@ namespace TDD.WebSite.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
-                    await _context.SaveChangesAsync();
+                    await _empoyeeRepository.UpdateEmployee(employee);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.EmployeeId))
+                    if (!_empoyeeRepository.EmployeeExists((int)employee.EmployeeId))
                     {
                         return NotFound();
                     }
@@ -112,8 +106,7 @@ namespace TDD.WebSite.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            var employee = await _empoyeeRepository.GetEmployeeById((int)id);
             if (employee == null)
             {
                 return NotFound();
@@ -126,15 +119,8 @@ namespace TDD.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
+            await _empoyeeRepository.DeleteEmployee(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EmployeeExists(int id)
-        {
-            return _context.Employees.Any(e => e.EmployeeId == id);
         }
     }
 }
