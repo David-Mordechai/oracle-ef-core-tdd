@@ -65,7 +65,7 @@ namespace TDD.Repositories.Library.Tests
         }
 
         [Fact]
-        public async void UpdateEmployee_Success_ReturnsAddedEmployee()
+        public async void UpdateEmployee_Success_ReturnsUpdatedEmployee()
         {
             var employeeToUpdate = Context.Employees.Single(x => x.EmployeeId == 2);
             employeeToUpdate.FirstName = "New updated";

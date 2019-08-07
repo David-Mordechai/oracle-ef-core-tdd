@@ -17,7 +17,7 @@ namespace TDD.WebSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _empoyeeRepository.GetEmployees());
+            return View("Index", await _empoyeeRepository.GetEmployees());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -33,12 +33,12 @@ namespace TDD.WebSite.Controllers
                 return NotFound();
             }
 
-            return View(employee);
+            return View("Details", employee);
         }
 
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace TDD.WebSite.Controllers
                 await _empoyeeRepository.AddEmployee(employee);
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View("Create", employee);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -65,7 +65,7 @@ namespace TDD.WebSite.Controllers
             {
                 return NotFound();
             }
-            return View(employee);
+            return View("Edit", employee);
         }
 
         [HttpPost]
@@ -96,7 +96,7 @@ namespace TDD.WebSite.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View("Edit", employee);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -112,7 +112,7 @@ namespace TDD.WebSite.Controllers
                 return NotFound();
             }
 
-            return View(employee);
+            return View("Delete", employee);
         }
 
         [HttpPost, ActionName("Delete")]
