@@ -19,11 +19,11 @@ open powershell and in powershell type this commands
 
 ### 5. Copy below script to open SQL shell, run this commands one by one
 
- connect sys as sysdba;
- -- Here enter the password as 'Oradoc_db1'
- alter session set "_ORACLE_SCRIPT"=true;
- create user ora_doc_owner identified by ora_doc_owner;
- GRANT ALL PRIVILEGES TO ora_doc_owner;
+ # connect sys as sysdba;
+ # -- Here enter the password as 'Oradoc_db1'
+ # alter session set "_ORACLE_SCRIPT"=true;
+ # create user ora_doc_owner identified by ora_doc_owner;
+ # GRANT ALL PRIVILEGES TO ora_doc_owner;
 
 ### 6. How to run/stop oracle container and how to see witch containers we have
   6.1 docker container ls -1 
