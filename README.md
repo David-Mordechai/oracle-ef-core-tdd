@@ -38,7 +38,7 @@ open powershell and in powershell type this commands
  Port: 1521
  Service name: ORCLCDB.localdomain
 
-## How to create table Employees in oracle database from entity framework core => code first approach
+## How to create table Employees in oracle database from ef.core => code first approach
 
 ### 1. Delete Migrations folder from TDD.Data.Library project before procceding to next steps
 ### 2. Tools => Nuget Package Manager => Package Manager Console
