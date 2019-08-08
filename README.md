@@ -1,6 +1,6 @@
 # oracle-ef-core-tdd
 
-## How to configure docker with oracle container 
+### How to configure docker with oracle container 
 
 download docker and install
 open powershell and in powershell type this commands
@@ -37,3 +37,11 @@ open powershell and in powershell type this commands
  Hostname: localhost
  Port: 1521
  Service name: ORCLCDB.localdomain
+
+## How to create table Employees in oracle database from entity framework core => code first approach
+
+### 1. Delete Migrations folder from TDD.Data.Library project before procceding to next steps
+### 2. Tools => Nuget Package Manager => Package Manager Console
+### 3. In Package Manager Console change Default project to TDD.Data.Library
+### 4. Run command => Add-Migration Initial
+### 5. Then Run Command => Update-Database
